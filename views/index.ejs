@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page with Table</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #00ff48;
+        }
+
+        .btn1 {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #e10b0b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn1:hover {
+            background-color: #ff4c4c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to Our Home Page</h1>
+        <a href="/create" class="btn">ADD</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publication Date</th>
+                    <th>Publisher</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% for (let x of title) { %>
+                <tr>
+                    <td><%= x.title %></td>
+                    <td><%= x.author %></td>
+                    <td><%= x.publication_date %></td>
+                    <td><%= x.publisher %></td>
+                    <td><%= x.description %></td>
+                    <td>
+                        <a href="/update/<%= x.id %>" class="btn">Update</a>
+                        <a href="delete/<%= x.id %>" class="btn1">Delete</a>
+                    </td>
+                </tr>
+              <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
