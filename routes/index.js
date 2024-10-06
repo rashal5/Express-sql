@@ -21,30 +21,28 @@ router.get('/', async function(req, res, next) {
 router.get('/update/:id', async function(req, res, next) {
   const id = req.params.id
   const data = await pool.query(`SELECT * FROM books WHERE id = ${id};`)
-  
-    const newdata = data[0]
-    // const title = req.body.title;
-    // const author = req.body.author;
-    // const publication_date = req.body.publication_date;
-    // const publisher = req.body.publisher;
-    // const description = req.body.description;
-
-    // // Unsafe use of template literals (avoid in production)
-    // const query = `
-    //   UPDATE books 
-    //   SET 
-    //     title = '${title}', 
-    //     author = '${author}', 
-    //     publication_date = '${publication_date}', 
-    //     publisher = '${publisher}', 
-    //     description = '${description}' 
-    //   WHERE id = ${id};
-    // `;
-
-    // await book.query(query);
+  const newdata = data[0]
 
     res.render('update', { title: newdata });
 });
+
+router.post('/update/:id', async function(req, res, next) {
+  const id = req.params.id
+  const title = req.body.title;
+  const author = req.body.author;
+  const publication_date = req.body.publication_date;
+  const publisher = req.body.publisher;
+  const description = req.body.description;
+
+  try {
+    await pool.query(`UPDATE books SET title = '${title}', author = '${author}', publication_date = '${publication_date}', publisher = '${publisher}', description = '${description}'   WHERE id = ${id};
+    `);
+    res.redirect('/')
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 
 router.get('/delete/:id', async function(req, res, next) {

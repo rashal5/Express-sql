@@ -74,7 +74,7 @@
     <% for (let x of title) { %>
     <div class="form-container">
         <h2>Book Information</h2>
-        <form>
+        <form  action="/update/<%= x.id %>" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" value="<%= x.title %>" required>
